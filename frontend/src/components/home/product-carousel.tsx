@@ -33,7 +33,7 @@ export function ProductCarousel({ heading, products }: ProductCarouselProps) {
   };
 
   return (
-    <section className="relative bg-background py-4 pb-10">
+    <section className="relative py-4 pb-10">
       <ScrollReveal>
         <h2 className="py-8 text-center text-sm font-bold tracking-wide uppercase">
           {heading}

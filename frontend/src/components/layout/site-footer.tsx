@@ -33,7 +33,7 @@ const footerSections = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-background">
+    <footer className="border-t border-border/60">
       <div className="mx-auto w-full max-w-[1440px] px-6 py-12 lg:px-12">
         <div className="grid gap-8 sm:grid-cols-3">
           {footerSections.map((section) => (

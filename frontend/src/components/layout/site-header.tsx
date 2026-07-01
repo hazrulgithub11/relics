@@ -161,9 +161,9 @@ export function SiteHeader({ variant = "solid" }: SiteHeaderProps) {
         "z-50 w-full transition-colors duration-300",
         variant === "overlay"
           ? scrolled
-            ? "sticky top-0 border-b border-border bg-background"
+            ? "sticky top-0 border-b border-border/60 bg-background/85 backdrop-blur-md"
             : "absolute inset-x-0 top-0"
-          : "sticky top-0 border-b border-border bg-background",
+          : "sticky top-0 border-b border-border/60 bg-background/85 backdrop-blur-md",
       )}
     >
       <AnnouncementBar

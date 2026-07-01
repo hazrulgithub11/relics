@@ -84,7 +84,7 @@ export function HeroSection({
         {cta && (
           <Link
             to={isExternal ? "#" : cta.href}
-            className="mt-8 inline-block rounded-sm bg-white px-8 py-3 text-xs font-medium tracking-wide text-foreground uppercase transition-opacity hover:opacity-90"
+            className="mt-8 inline-block rounded-sm bg-white px-8 py-3 text-xs font-medium tracking-wide text-black uppercase transition-opacity hover:opacity-90"
           >
             {cta.label}
           </Link>

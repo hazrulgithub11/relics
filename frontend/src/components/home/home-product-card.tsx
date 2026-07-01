@@ -25,7 +25,7 @@ export function HomeProductCard({ product }: HomeProductCardProps) {
           className="h-full w-full object-cover object-center transition-opacity group-hover:opacity-85"
         />
         {badgeLabel && (
-          <span className="absolute top-3 left-3 bg-background px-2 py-0.5 text-[10px] font-medium tracking-wide uppercase">
+          <span className="absolute top-3 left-3 bg-background/90 px-2 py-0.5 text-[10px] font-medium tracking-wide text-foreground uppercase backdrop-blur-sm">
             {badgeLabel}
           </span>
         )}
