@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import {
-  ChevronLeft,
-  ChevronRight,
   ChevronRight as NavChevron,
   CircleHelp,
-  Heart,
   Menu,
   Search,
   ShoppingBag,
@@ -12,29 +9,22 @@ import {
   X,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { AnnouncementBar } from "@/components/home/announcement-bar";
+import { announcement } from "@/data/home-content";
 import { cn } from "@/lib/utils";
 
-const utilityLinks = ["Find a Store", "Help", "Join Us", "Sign In"];
-
-const navLinksWithSubmenu = [
-  "New & Featured",
-  "Men",
-  "Women",
-  "Kids",
-  "Sale",
+const navLinks = [
+  { label: "Shop", href: "/men/clothing" },
+  { label: "New Arrivals", href: "/men/clothing" },
+  { label: "About", href: "#" },
+  { label: "Rare Finds", href: "/men/clothing" },
+  { label: "Rewards", href: "#" },
+  { label: "Sustainability", href: "#" },
 ] as const;
 
-const navLinksFlat = ["Nike Football", "SNKRS", "Download Nike App"] as const;
-
-const desktopNavLinks = [
-  "New & Featured",
-  "Men",
-  "Women",
-  "Kids",
-  "Nike Football",
-  "Sale",
-  "SNKRS",
-];
+type SiteHeaderProps = {
+  variant?: "solid" | "overlay";
+};
 
 type MobileMenuDrawerProps = {
   open: boolean;
@@ -90,48 +80,28 @@ function MobileMenuDrawer({ open, onClose }: MobileMenuDrawerProps) {
 
         <nav className="flex-1 overflow-y-auto px-6 pb-6">
           <ul>
-            {navLinksWithSubmenu.map((link) => (
-              <li key={link}>
+            {navLinks.map((link) => (
+              <li key={link.label}>
                 <Link
-                  to={link === "Men" ? "/men/clothing" : "#"}
+                  to={link.href}
                   onClick={onClose}
                   className="flex items-center justify-between py-4 text-2xl font-medium leading-tight"
                 >
-                  <span className="flex items-center gap-2">
-                    {link}
-                    {link === "New & Featured" && (
-                      <span className="rounded bg-muted px-2 py-0.5 text-xs font-normal text-muted-foreground">
-                        main
-                      </span>
-                    )}
-                  </span>
+                  <span>{link.label}</span>
                   <NavChevron className="size-5" strokeWidth={1.5} />
                 </Link>
               </li>
             ))}
-            {navLinksFlat.map((link) => (
-              <li key={link}>
-                <button
-                  type="button"
-                  className="block w-full py-4 text-left text-2xl font-medium leading-tight"
-                >
-                  {link}
-                </button>
-              </li>
-            ))}
           </ul>
-
-          <div className="mt-2 flex items-center gap-2 py-4 text-2xl font-medium">
-            <span className="text-xl font-bold">&#x1F3C0;</span>
-            <span>Jordan</span>
-          </div>
         </nav>
 
         <div className="border-t border-border px-6 py-6">
           <p className="text-sm leading-relaxed text-muted-foreground">
-            Become a Relics Member for the best products, inspiration and
-            stories in sport.{" "}
-            <button type="button" className="font-medium text-foreground underline underline-offset-2">
+            Become a Relics Member for early access to rare vintage drops.{" "}
+            <button
+              type="button"
+              className="font-medium text-foreground underline underline-offset-2"
+            >
               Learn more
             </button>
           </p>
@@ -164,25 +134,51 @@ function MobileMenuDrawer({ open, onClose }: MobileMenuDrawerProps) {
   );
 }
 
-export function SiteHeader() {
+export function SiteHeader({ variant = "solid" }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const isOverlayActive = variant === "overlay" && !scrolled;
+
+  useEffect(() => {
+    if (variant !== "overlay") {
+      setScrolled(false);
+      return;
+    }
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > window.innerHeight * 0.15);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [variant]);
 
   return (
-    <header className="border-b border-border">
-      <div className="mx-auto w-full max-w-[1440px]">
-        <div className="hidden h-10 items-center justify-end gap-6 px-6 text-xs text-muted-foreground lg:flex lg:px-12">
-          {utilityLinks.map((link) => (
-            <button
-              key={link}
-              type="button"
-              className="transition-colors hover:text-foreground"
-            >
-              {link}
-            </button>
-          ))}
-        </div>
+    <header
+      className={cn(
+        "z-50 w-full transition-colors duration-300",
+        variant === "overlay"
+          ? scrolled
+            ? "sticky top-0 border-b border-border bg-background"
+            : "absolute inset-x-0 top-0"
+          : "sticky top-0 border-b border-border bg-background",
+      )}
+    >
+      <AnnouncementBar
+        message={announcement.message}
+        linkLabel={announcement.linkLabel}
+        linkHref={announcement.linkHref}
+      />
 
-        <div className="flex h-16 items-center gap-4 px-6 lg:gap-6 lg:border-t lg:border-border lg:px-12">
+      <div className="mx-auto w-full max-w-[1440px]">
+        <div
+          className={cn(
+            "flex h-16 items-center gap-4 px-6 transition-colors duration-300 lg:gap-6 lg:px-12",
+            isOverlayActive && "text-white",
+          )}
+        >
           <Link
             to="/"
             className="shrink-0 text-xl font-bold tracking-tight"
@@ -191,100 +187,86 @@ export function SiteHeader() {
           </Link>
 
           <nav className="hidden flex-1 items-center justify-center gap-6 lg:flex">
-            {desktopNavLinks.map((link) => (
+            {navLinks.map((link) => (
               <Link
-                key={link}
-                to={link === "Men" ? "/men/clothing" : "#"}
+                key={link.label}
+                to={link.href}
                 className={cn(
-                  "text-base font-medium transition-colors hover:text-muted-foreground",
-                  link === "Men" && "text-foreground",
+                  "text-sm font-normal transition-colors",
+                  isOverlayActive
+                    ? "hover:text-white/70"
+                    : "hover:text-muted-foreground",
                 )}
               >
-                {link}
+                {link.label}
               </Link>
             ))}
           </nav>
 
           <div className="ml-auto flex items-center gap-4">
-            <div className="relative hidden sm:block">
-              <Search
-                className="absolute top-1/2 left-3 size-5 -translate-y-1/2 text-muted-foreground"
-                strokeWidth={1.5}
-              />
-              <input
-                type="search"
-                placeholder="Search"
-                className="h-10 w-40 rounded-full border-0 bg-muted pr-4 pl-10 text-sm outline-none ring-0 focus:ring-1 focus:ring-foreground lg:w-48"
-              />
-            </div>
-
-            <button
-              type="button"
-              aria-label="Search"
-              className="transition-colors hover:text-muted-foreground sm:hidden"
-            >
-              <Search className="size-5" strokeWidth={1.5} />
-            </button>
-
             <button
               type="button"
               aria-label="Account"
-              className="transition-colors hover:text-muted-foreground lg:hidden"
+              className={cn(
+                "hidden transition-colors lg:block",
+                isOverlayActive
+                  ? "hover:text-white/70"
+                  : "hover:text-muted-foreground",
+              )}
             >
               <User className="size-5" strokeWidth={1.5} />
             </button>
 
             <button
               type="button"
-              aria-label="Wishlist"
-              className="hidden transition-colors hover:text-muted-foreground lg:block"
+              aria-label="Search"
+              className={cn(
+                "transition-colors",
+                isOverlayActive
+                  ? "hover:text-white/70"
+                  : "hover:text-muted-foreground",
+              )}
             >
-              <Heart className="size-5" strokeWidth={1.5} />
+              <Search className="size-5" strokeWidth={1.5} />
             </button>
 
             <button
               type="button"
               aria-label="Shopping bag"
-              className="transition-colors hover:text-muted-foreground"
+              className={cn(
+                "relative transition-colors",
+                isOverlayActive
+                  ? "hover:text-white/70"
+                  : "hover:text-muted-foreground",
+              )}
             >
               <ShoppingBag className="size-5" strokeWidth={1.5} />
+              <span
+                className={cn(
+                  "absolute -top-1.5 -right-1.5 flex size-4 items-center justify-center text-[10px] font-medium",
+                  isOverlayActive
+                    ? "text-white"
+                    : "text-foreground",
+                )}
+              >
+                0
+              </span>
             </button>
 
             <button
               type="button"
               aria-label="Open menu"
               onClick={() => setMobileMenuOpen(true)}
-              className="transition-colors hover:text-muted-foreground lg:hidden"
+              className={cn(
+                "transition-colors lg:hidden",
+                isOverlayActive
+                  ? "hover:text-white/70"
+                  : "hover:text-muted-foreground",
+              )}
             >
               <Menu className="size-5" strokeWidth={1.5} />
             </button>
           </div>
-        </div>
-
-        <div className="flex h-9 items-center justify-center gap-2 bg-muted px-4 text-xs lg:gap-4 lg:px-12">
-          <button
-            type="button"
-            aria-label="Previous promo"
-            className="shrink-0 text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ChevronLeft className="size-4" strokeWidth={1.5} />
-          </button>
-          <p className="truncate text-center">
-            New Members Enjoy 15% Off On The Relics App. Use APP15{" "}
-            <button type="button" className="underline underline-offset-2">
-              Download Now
-            </button>{" "}
-            <button type="button" className="underline underline-offset-2">
-              T&amp;Cs
-            </button>
-          </p>
-          <button
-            type="button"
-            aria-label="Next promo"
-            className="shrink-0 text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ChevronRight className="size-4" strokeWidth={1.5} />
-          </button>
         </div>
       </div>
 

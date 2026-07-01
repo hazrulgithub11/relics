@@ -5,6 +5,7 @@ export type Product = {
   name: string;
   price: string;
   image: string;
+  sizes?: string;
 };
 
 export const products: Product[] = [
@@ -15,6 +16,7 @@ export const products: Product[] = [
     name: "90s Reverse Weave Crewneck Tee",
     price: "RM 185",
     image: "/assets/1.png",
+    sizes: "S M L XL",
   },
   {
     id: "2",
@@ -23,6 +25,7 @@ export const products: Product[] = [
     name: "Faded Stonewash Pocket Tee",
     price: "RM 145",
     image: "/assets/2.png",
+    sizes: "S M L XL XXL",
   },
   {
     id: "3",
@@ -31,6 +34,7 @@ export const products: Product[] = [
     name: "Classic Polo Bear Graphic Shirt",
     price: "RM 265",
     image: "/assets/3.png",
+    sizes: "S M L XL",
   },
   {
     id: "4",
@@ -39,6 +43,7 @@ export const products: Product[] = [
     name: "Heritage Flag Logo Tee",
     price: "RM 120",
     image: "/assets/4.png",
+    sizes: "M L XL",
   },
   {
     id: "5",
@@ -47,6 +52,7 @@ export const products: Product[] = [
     name: "Script Logo Work Shirt",
     price: "RM 195",
     image: "/assets/5.png",
+    sizes: "S M L XL",
   },
   {
     id: "6",
@@ -54,6 +60,7 @@ export const products: Product[] = [
     name: "Hi-Tech Stadium Zip Tee",
     price: "RM 230",
     image: "/assets/6.png",
+    sizes: "S M L",
   },
   {
     id: "7",
@@ -62,6 +69,7 @@ export const products: Product[] = [
     name: "80s Blank Heavyweight Tee",
     price: "RM 175",
     image: "/assets/7.png",
+    sizes: "M L XL",
   },
   {
     id: "8",
@@ -69,6 +77,7 @@ export const products: Product[] = [
     name: "Single Stitch Band Tee",
     price: "RM 135",
     image: "/assets/8.png",
+    sizes: "S M L XL XXL",
   },
   {
     id: "9",

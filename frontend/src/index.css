@@ -28,6 +28,8 @@
   --color-ring: var(--ring);
   --font-sans: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
   --font-display: var(--font-sans);
+  --font-script: "Dancing Script", cursive;
+  --font-serif: "Playfair Display", serif;
 }
 
 :root {
