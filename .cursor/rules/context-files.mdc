@@ -1,0 +1,46 @@
+---
+description: Guardrails for editing any file under context/. Enforces honest labeling, prevents invented facts, and ensures cross-file consistency whenever a context file is opened or changed.
+globs: context/**
+alwaysApply: false
+---
+
+# Context file rules
+
+## Never invent product facts
+
+Do not fill any placeholder with assumed or inferred product behavior. If the answer is unknown, write `[OPEN]` and leave it for the discovery workflow. A placeholder left blank is better than a confident guess.
+
+## Status labels — use them on every non-trivial claim
+
+| Label | When to use |
+|-------|------------|
+| `[DECIDED]` | Agreed by the team, reflected in spec |
+| `[IMPLEMENTED]` | Code already matches this |
+| `[HYPOTHESIS]` | Reasonable bet, not yet validated |
+| `[OPEN]` | Unresolved — needs a decision before building |
+| `[FUTURE]` | Intentionally out of v1 scope |
+
+## Cross-file consistency — check before saving
+
+When any of these sections change, verify the listed files stay aligned:
+
+| Changed section | Check these too |
+|----------------|----------------|
+| Overview or Goals | Features, Scope, Success Criteria (same file) |
+| Core User Flow | `architecture.md` system boundaries |
+| Features or Scope | `progress-tracker.md` next steps and open questions |
+| Stack or storage model | `architecture.md` invariants |
+| Any decision that contradicts code | Add a note: `Code: [current] → Spec: [intended]` |
+
+## When a section changes
+
+1. Update upstream sections first (Overview → Goals → Flow → Scope).
+2. Add deferred decisions to `progress-tracker.md` under Open Questions.
+3. Do not silently rewrite — show the proposed change and confirm before saving.
+
+## `progress-tracker.md` must stay current
+
+After any meaningful change to any context file, `progress-tracker.md` must reflect:
+- What was decided
+- What is now open or deferred
+- What the code does not yet match

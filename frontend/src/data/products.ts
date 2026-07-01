@@ -1,0 +1,150 @@
+export type Product = {
+  id: string;
+  badge?: string;
+  brand: string;
+  name: string;
+  price: string;
+  image: string;
+};
+
+export const products: Product[] = [
+  {
+    id: "1",
+    badge: "Just In",
+    brand: "Champion USA",
+    name: "90s Reverse Weave Crewneck Tee",
+    price: "RM 185",
+    image: "/assets/1.png",
+  },
+  {
+    id: "2",
+    badge: "Just In",
+    brand: "Levi's Vintage",
+    name: "Faded Stonewash Pocket Tee",
+    price: "RM 145",
+    image: "/assets/2.png",
+  },
+  {
+    id: "3",
+    badge: "Just In",
+    brand: "Ralph Lauren",
+    name: "Classic Polo Bear Graphic Shirt",
+    price: "RM 265",
+    image: "/assets/3.png",
+  },
+  {
+    id: "4",
+    badge: "Sale",
+    brand: "Tommy Hilfiger",
+    name: "Heritage Flag Logo Tee",
+    price: "RM 120",
+    image: "/assets/4.png",
+  },
+  {
+    id: "5",
+    badge: "Just In",
+    brand: "Carhartt WIP",
+    name: "Script Logo Work Shirt",
+    price: "RM 195",
+    image: "/assets/5.png",
+  },
+  {
+    id: "6",
+    brand: "Polo Sport",
+    name: "Hi-Tech Stadium Zip Tee",
+    price: "RM 230",
+    image: "/assets/6.png",
+  },
+  {
+    id: "7",
+    badge: "Rare Find",
+    brand: "Russell Athletic",
+    name: "80s Blank Heavyweight Tee",
+    price: "RM 175",
+    image: "/assets/7.png",
+  },
+  {
+    id: "8",
+    brand: "Hanes Beefy",
+    name: "Single Stitch Band Tee",
+    price: "RM 135",
+    image: "/assets/8.png",
+  },
+  {
+    id: "9",
+    badge: "Just In",
+    brand: "Starter",
+    name: "Pro Line College Crew Shirt",
+    price: "RM 210",
+    image: "/assets/9.png",
+  },
+  {
+    id: "10",
+    badge: "Sale",
+    brand: "FUBU",
+    name: "Original Hip-Hop Logo Tee",
+    price: "RM 155",
+    image: "/assets/10.png",
+  },
+  {
+    id: "11",
+    badge: "Rare Find",
+    brand: "Lee Sport",
+    name: "Distressed Collegiate Graphic Tee",
+    price: "RM 165",
+    image: "/assets/11.png",
+  },
+  {
+    id: "12",
+    brand: "Cross Colours",
+    name: "Culture Movement Block Tee",
+    price: "RM 245",
+    image: "/assets/12.png",
+  },
+  {
+    id: "13",
+    badge: "Just In",
+    brand: "Reebok Classic",
+    name: "Vector Logo Vintage Tee",
+    price: "RM 190",
+    image: "/assets/13.png",
+  },
+  {
+    id: "14",
+    brand: "Sergio Tacchini",
+    name: "80s Tennis Logo Shirt",
+    price: "RM 280",
+    image: "/assets/14.png",
+  },
+  {
+    id: "15",
+    badge: "Rare Find",
+    brand: "Fila Vintage",
+    name: "Heritage Taping Graphic Tee",
+    price: "RM 215",
+    image: "/assets/15.png",
+  },
+  {
+    id: "16",
+    badge: "Just In",
+    brand: "Ellesse",
+    name: "Prado Retro Logo Tee",
+    price: "RM 170",
+    image: "/assets/16.png",
+  },
+  {
+    id: "17",
+    brand: "Umbro",
+    name: "90s Football Training Shirt",
+    price: "RM 195",
+    image: "/assets/17.png",
+  },
+  {
+    id: "18",
+    badge: "Sale",
+    brand: "Kappa",
+    name: "Omini Logo Banda Tee",
+    price: "RM 145",
+    image: "/assets/18.png",
+  },
+];
