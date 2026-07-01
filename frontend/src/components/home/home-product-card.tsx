@@ -17,7 +17,7 @@ export function HomeProductCard({ product }: HomeProductCardProps) {
   const title = `${product.brand} ${product.name}`;
 
   return (
-    <article className="group w-[calc(50%-0.5rem)] shrink-0 snap-start cursor-pointer sm:w-[calc(33.333%-0.67rem)] lg:w-[calc(25%-0.75rem)]">
+    <article className="group w-full cursor-pointer">
       <div className="relative aspect-square overflow-hidden bg-card">
         <img
           src={product.image}

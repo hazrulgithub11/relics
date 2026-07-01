@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
+import { ScrollReveal } from "@/components/motion/scroll-reveal";
 import { FilterSidebar } from "@/components/product/filter-sidebar";
 import { ProductGrid } from "@/components/product/product-grid";
 import { categories, mobileFilterChips } from "@/data/catalog";
@@ -12,12 +13,12 @@ export function CatalogPage() {
 
   return (
     <div>
-      <div className="px-6 pt-6 lg:px-12">
+      <ScrollReveal className="px-6 pt-6 lg:px-12">
         <h1 className="text-2xl font-medium tracking-tight">
           Vintage Shirts{" "}
           <span className="text-muted-foreground">({products.length})</span>
         </h1>
-      </div>
+      </ScrollReveal>
 
       <div className="mt-4 overflow-x-auto px-6 lg:hidden">
         <div className="flex w-max gap-6 border-b border-border pb-3">

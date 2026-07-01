@@ -1,6 +1,12 @@
 import { useCallback, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import type { Product } from "@/data/products";
+import {
+  ScrollReveal,
+  staggerContainerVariants,
+  staggerItemVariants,
+} from "@/components/motion/scroll-reveal";
 import { HomeProductCard } from "./home-product-card";
 
 type ProductCarouselProps = {
@@ -28,20 +34,32 @@ export function ProductCarousel({ heading, products }: ProductCarouselProps) {
 
   return (
     <section className="relative bg-background py-4 pb-10">
-      <h2 className="py-8 text-center text-sm font-bold tracking-wide uppercase">
-        {heading}
-      </h2>
+      <ScrollReveal>
+        <h2 className="py-8 text-center text-sm font-bold tracking-wide uppercase">
+          {heading}
+        </h2>
+      </ScrollReveal>
 
       <div className="relative">
-        <div
+        <motion.div
           ref={scrollRef}
           onScroll={updateProgress}
           className="flex gap-4 overflow-x-auto px-6 [-ms-overflow-style:none] [scrollbar-width:none] lg:px-12 [&::-webkit-scrollbar]:hidden"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={staggerContainerVariants}
         >
           {products.map((product) => (
-            <HomeProductCard key={product.id} product={product} />
+            <motion.div
+              key={product.id}
+              variants={staggerItemVariants}
+              className="w-[calc(50%-0.5rem)] shrink-0 snap-start sm:w-[calc(33.333%-0.67rem)] lg:w-[calc(25%-0.75rem)]"
+            >
+              <HomeProductCard product={product} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <button
           type="button"
